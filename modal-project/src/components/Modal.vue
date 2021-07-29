@@ -1,11 +1,29 @@
 <template>
-  <div class="backdrop">
-    <div class="modal">
-      <p> modal content </p>
+  <div class="backdrop" @click.self="closeModal">
+    <div class="modal" :class="{ sale: theme === 'sale' }">
+      <slot>defualt content</slot>
+      <div class="actions">
+        <slot name="links"></slot>
+      </div>
+      <div class="items">
+        <slot name="items"></slot>
+      </div>
     </div>
   </div>
 </template>
 
+<script>
+export default {
+  props: ['theme'],
+  methods: {
+    closeModal() {
+      this.$emit('close')
+    }
+  }
+}
+</script>
+
+<!-- add scoped so style does not affect other compnents -->
 <style>
   .modal {
     width: 400px;
@@ -20,5 +38,23 @@
     background: rgba(0, 0, 0, 0.5);
     width: 100%;
     height: 100%;
+  }
+  .modal.h1 {
+    color: #03cfb4;
+    border: none;
+    padding: 0;
+  }
+  .modal.sale {
+    background: crimson;
+    color: white;
+  }
+  .modal.sale h1 {
+    color: white;
+  }
+  .modal.sale .actions {
+    color: white;
+  }
+  .modal.sale .actions a {
+    color: white;
   }
 </style>
