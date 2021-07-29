@@ -3,6 +3,44 @@
   <head>
     <title> Learning Vue </title>
     <script src="https://unpkg.com/vue@3.0.2"></script>
+    <style>
+      body {
+        background: #eee;
+        max-width: 960px;
+        margin: 20px auto;
+      }
+      p, h3, ul {
+        margin: 0;
+        padding: 0;
+      }
+      li {
+        list-style-type: none;
+        background: #fff;
+        margin: 20px auto;
+        padding: 10px 20px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      img {
+        width: 60px;
+        height: 100px;
+      }
+
+      .box {
+        padding: 50px 0;
+        width: 200px;
+        text-align: center;
+        background: #ddd;
+        margin: 20px;
+        display: inline-block;
+      }
+      li.fav {
+        background: #ff9ed2;
+        color: #fff;
+      }
+    </style>
   </head>
   <body>
     <h1> Hello, Vue :) </h1>
@@ -38,6 +76,41 @@
       <!-- show elements based on condition, v-show=property -->
       <!-- v-show uses CSS to hide element, does not remove from DOM, less expensive -->
       <div v-show="showBooks"> Books shown </div>
+      <hr>
+      <!-- other mouse events -->
+      <!-- use $event if you want to input other values -->
+      <div class="box" @mouseover="handleEvent($event, 5)">mouseover (enter)</div>
+      <div class="box" @mouseleave="handleEvent">mouseleave (exit)</div>
+      <div class="box" @dblclick="handleEvent">double click</div>
+      <!-- coordinate of mouse updates as mousemoves within div -->
+      <div class="box" @mousemove="handleMousemove"> ({{ x }}, {{ y }})</div>
+      <hr>
+      <!-- for loop = v-for=item in array -->
+      <!-- cycle through array & output template -->
+
+      <!-- attribute binding, bind dynamic values to HTML attributes -->
+      <!-- v-bind:attribute="value" -->
+      <!-- shortcut = :attribute:"value" -->
+
+      <!-- dynamic classes, use attribute binding to change element class style -->
+      <!-- :class= "{className: boolean}" -->
+
+      <!-- computed properties, way to define a data property within component that depends on other data in component -->
+      <!-- works like data object -->
+      <div v-for="bookF in filteredBooks">
+        <p> Fav: {{ bookF.title }} </p>
+      </div>
+
+      <ul>
+        <li v-for="book in books" :class="{ fav: book.isFav }" @click="toggleFav(book)">
+          <b> {{ book.title }} </b> by {{ book.author }}
+          <img :src="book.img" :alt="book.title"></img>
+        </li>
+      </ul>
+      <a v-bind:href="url"> Long form website </a>
+      <br>
+      <a :href="url"> Short form website </a>
+
     </div>
 
     <script src="app.js"></script>
