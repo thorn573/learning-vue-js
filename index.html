@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title> Learning Vue </title>
+    <script src="https://unpkg.com/vue@3.0.2"></script>
+  </head>
+  <body>
+    <h1> Hello, Vue :) </h1>
+
+    <!-- create template in HTML file for organization -->
+    <!-- Vue adds dynamic features not included in HTML -->
+    <div id="app">
+      <!-- title variable to have dynamic data in Vue (HandleBars.JS syntax) -->
+      <p> {{ title }} - {{ author }} - {{ age }} </p>
+      <!-- reacting to events, use v-on:event="js code" (vue on: event = action) -->
+      <button v-on:click="age++">Increase age</button>
+      <button v-on:click="age--">Decrease age</button>
+      <!-- event reaction short cut v-on: = @ -->
+      <!-- event reacted to in app.js by method -->
+      <div @click="changeTitle('Oathbringer')">Change book title</div>
+      <hr>
+      <!-- conditional rendering, use v-if=action -->
+      <div v-if="age==45">
+        <p> Author is 45 years old! </p>
+      </div>
+      <div v-else-if="age!=45">
+        <p> Author is not 45 years old! </p>
+      </div>
+      <!-- toggle condition -->
+      <button @click="toggleShowBooks">
+        <!-- v-if removes element from DOM, more expensive -->
+        <span v-if="showBooks"> Hide Books </span>
+        <span v-else> Show Books </span>
+      </button>
+      <div v-if="showBooks">
+        <p> {{ title }} </p>
+      </div>
+      <!-- show elements based on condition, v-show=property -->
+      <!-- v-show uses CSS to hide element, does not remove from DOM, less expensive -->
+      <div v-show="showBooks"> Books shown </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
